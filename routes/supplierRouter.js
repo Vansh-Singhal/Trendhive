@@ -24,6 +24,15 @@ if (process.env.NODE_ENV === "development") {
     });
 }
 
+router.get("/signup",(req,res)=>{
+    try{
+        res.render("supplierRegistration");
+    }
+    catch(err){
+        res.send(err);
+    }
+})
+
 router.get("/", (req, res) => {
     res.send("hey");
 });
