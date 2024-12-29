@@ -1,12 +1,21 @@
 const mongoose = require("mongoose");
+const dbgr = require("debug")("development:mongoose");
+const config = require("config");
+
+
+// To set up an environment variable    :   $env:DEBUG="development:*"
+// To remove an environment variable    :   Remove-Item Env:DEBUG
+// To create a Node environment         :   $env:NODE_ENV="development"
+// To check the Node environment        :   console.log(process.env.NODE_ENV);
 
 mongoose
-    .connect("mongodb://localhost:27017/Trendhive")
+    .connect(`${config.get("MONGODB_URI")}/Trendhive`)
     .then(()=>{
-        console.log("Connection successful");
+        dbgr("Connection successful");
     })
     .catch((err)=>{
-        console.log(err);
+        dbgr(err);
+        
     })
 
 module.exports = mongoose.connection;

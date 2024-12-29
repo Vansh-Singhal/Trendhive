@@ -9,6 +9,7 @@ const productSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
+    quantity: Number,
     bgcolor: String,
     panelcolor: String,
     textcolor: String

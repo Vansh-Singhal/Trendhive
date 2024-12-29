@@ -14,7 +14,7 @@ const supplierSchema = mongoose.Schema({
         default: [],
     },
     contact: Number,
-    picture: String,
+    picture: String,    
     gstin: String
 });
 
