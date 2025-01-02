@@ -1,7 +1,8 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/user");
-const {generateToken} = require("../utils/generateToken")
+const {generateToken} = require("../utils/generateToken");
+const cookieParser = require("cookie-parser");
 
 
 module.exports.registerUser = async (req, res) => {
@@ -33,6 +34,22 @@ module.exports.registerUser = async (req, res) => {
 
     }
     catch (err) {
-
+        res.send(err.message);
     }
+}
+
+module.exports.loginUser = async(req,res) =>{
+    let {email, password} = req.body;
+
+    let user = await userModel.findOne({email:email});
+
+    if (!user) return res.send("Email or Password incorrect");
+    
+    bcrypt.compare(password,user.password,(err,result)=>{
+        if (!result) return res.send("Email or Password incorrect");
+
+        let token = generateToken(user);
+        res.cookie("token",token);
+        res.send("You can login");
+    });
 }
