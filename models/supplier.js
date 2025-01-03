@@ -15,7 +15,7 @@ const supplierSchema = mongoose.Schema({
     },
     contact: Number,
     picture: String,    
-    gstin: String
+    gsin: String
 });
 
 module.exports = mongoose.model("owner",supplierSchema);
